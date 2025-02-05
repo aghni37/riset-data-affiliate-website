@@ -1,0 +1,197 @@
+{
+  "Name": "FIX LINK SCRAPER SHOPEE",
+  "CreationDate": "2025-2-5",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "input disini.csv",
+      "Value": "database",
+      "Description": ""
+    },
+    {
+      "Command": "csvReadArray",
+      "Target": "${database}",
+      "Value": "databaseCSV",
+      "Description": ""
+    },
+    {
+      "Command": "prompt",
+      "Target": "Mulai dari baris @1",
+      "Value": "startline",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${!csvReadMaxRow}",
+      "Value": "endline",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number (${startline}) -1;",
+      "Value": "y",
+      "Description": ""
+    },
+    {
+      "Command": "while",
+      "Target": "${y}<${endline}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//*[@id=\"sll2-ShopeeHeaderWithSearch\"]/div/div/div/form/div/div/input",
+      "Value": "${databaseCSV[${y}][0]}",
+      "Targets": [
+        "xpath=//*[@id=\"sll2-ShopeeHeaderWithSearch\"]/div/div/div/form/div/div/input",
+        "xpath=//input[@value='celana dalam wanita']",
+        "xpath=//input",
+        "css=#sll2-ShopeeHeaderWithSearch > div > div > div.header-with-search__search-section > form > div > div.shopee-searchbar-input > input"
+      ],
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//*[@id=\"sll2-ShopeeHeaderWithSearch\"]/div/div/div/form/button",
+      "Value": "",
+      "Targets": [
+        "xpath=//*[@id=\"sll2-ShopeeHeaderWithSearch\"]/div/div/div/form/button",
+        "xpath=//button[@type='button']",
+        "xpath=//form/button",
+        "css=#sll2-ShopeeHeaderWithSearch > div > div > div.header-with-search__search-section > form > button"
+      ],
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "2000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "id=fetchAffiliateBtn",
+      "Value": "",
+      "Targets": [
+        "xpath=//*[@id=\"main\"]/div/div[2]/div/div/div/div/div/div[2]/section/fieldset/div[2]/section/button[3]",
+        "xpath=//button[3]",
+        "css=#main > div > div.t5pFIU > div > div > div > div > div > div.u37U8O > section > fieldset > div.shopee-sort-by-options > section.shopee-sort-by-options__option-group > button.shopee-sort-by-options__option.shopee-sort-by-options__option--selected"
+      ],
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "2000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "mulai",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "61",
+      "Value": "akhir",
+      "Description": ""
+    },
+    {
+      "Command": "XMove",
+      "Target": "200,200",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "XMouseWheel",
+      "Target": "18",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "2000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number (${mulai});",
+      "Value": "i",
+      "Description": ""
+    },
+    {
+      "Command": "while",
+      "Target": "${i}<${akhir}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeAttribute",
+      "Target": "//*[@id=\"main\"]/div/div[2]/div/div/div/div/div/div[2]/section/ul/li[${i}]/div/div//a@href",
+      "Value": "link",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"main\"]/div/div[2]/div/div/div/div/div/div[2]/section/ul/li[${i}]/div/div/a[1]/div/div[1]/div[2]",
+      "Value": "iklan",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${iklan}",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "https://shopee.co.id/${link}",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "link-affiliate.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return Number (${i})+1;",
+      "Value": "i",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "XMove",
+      "Target": "200,200",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "XMouseWheel",
+      "Target": "-20",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return Number (${y})+1;",
+      "Value": "y",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}

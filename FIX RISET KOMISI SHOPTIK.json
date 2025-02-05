@@ -1,0 +1,210 @@
+{
+  "Name": "FIX RISET KOMISI SHOPTIK",
+  "CreationDate": "2025-2-5",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "input disini.csv",
+      "Value": "database",
+      "Description": ""
+    },
+    {
+      "Command": "csvReadArray",
+      "Target": "${database}",
+      "Value": "datacsv",
+      "Description": ""
+    },
+    {
+      "Command": "prompt",
+      "Target": "Ketik",
+      "Value": "startline",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${!csvReadMaxRow}",
+      "Value": "endline",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript",
+      "Target": "return Number (${StartLine})-1;",
+      "Value": "i",
+      "Description": ""
+    },
+    {
+      "Command": "while",
+      "Target": "${i}<${endline}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "2000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "open",
+      "Target": "${datacsv[${i}][0]}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "2000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "XType // ${KEY_F5}",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "//*[@id=\"extension-livestream-container\"]/div/div/div[1]/div[3]",
+      "Value": "jumlahlive",
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "3000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//*[@id=\"extension-livestream-container\"]/div/div/div/div[4]",
+      "Value": "",
+      "Targets": [
+        "xpath=//*[@id=\"extension-livestream-container\"]/div/div/div/div[4]",
+        "xpath=//div[4]",
+        "css=#extension-livestream-container > div > div > div.nav-tabs > div:nth-child(4)"
+      ],
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "XClick // 600,250",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "XClick // 600,450",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "id=fetchAffiliateBtn",
+      "Value": "",
+      "Targets": [
+        "id=fetchAffiliateBtn",
+        "xpath=//*[@id=\"fetchAffiliateBtn\"]",
+        "xpath=//button[@id='fetchAffiliateBtn']",
+        "xpath=//div[6]/div/div/button",
+        "css=#fetchAffiliateBtn"
+      ],
+      "Description": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "4000",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"affiliate-info-content\"]/div/div[2]/div/div[2]/div/span[2]",
+      "Value": "komisiekstra",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"affiliate-info-content\"]/div/div[2]/div/div[2]/div[2]/span[2]",
+      "Value": "komisishopee",
+      "Description": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=//*[@id=\"affiliate-info-content\"]/div/div[2]/div/div[2]/div[3]/span[2]",
+      "Value": "totalkomisi",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "storeText // //*[@id=\"extension-livestream-container\"]/div[4]/div[1]/div[6]",
+      "Value": "totalpenjualan",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "storeText // xpath=//*[@id=\"sll2-normal-pdp-main\"]/div/div/div/div[2]/section/section[2]/div/div[2]/button/div",
+      "Value": "rating",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${datacsv[${i}][0]}",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${jumlahlive}",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${komisiekstra}",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${komisishopee}",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "${totalkomisi}",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "store // ${totalpenjualan}",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "store // ${rating}",
+      "Value": "!csvline",
+      "Description": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "komisi-affiliate.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return Number (${i})+1;",
+      "Value": "i",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}
