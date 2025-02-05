@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Link Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            plugins: [daisyui],
+            daisyui: {
+                themes: ["light", "dark"],
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" />
+</head>
+
+<body>
+    <!-- Drawer Wrapper -->
+    <div class="drawer">
+        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+            <!-- Navbar -->
+            <header class="navbar bg-base-100 shadow-lg">
+                <div class="navbar-start">
+                    <a href="https://www.instagram.com/6.1aq" class="btn btn-ghost normal-case text-xl">Aghni Q</a>
+                </div>
+                <div class="navbar-end">
+                    <a href="https://github.com/aghni37/riset-data-affiliate-website/releases/download/uivision/Script.UI.Vision.Riset.Affiliate.zip"
+                        class="btn btn-outline btn-sm mr-4">
+                        Unduh Script UI Vision
+                    </a>
+
+
+                    <label class="swap swap-rotate">
+                        <!-- this hidden checkbox controls the state -->
+                        <input type="checkbox" class="theme-controller" value="light" />
+
+                        <!-- sun icon -->
+                        <svg class="swap-off h-8 w-8 fill-current" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+                        </svg>
+
+                        <!-- moon icon -->
+                        <svg class="swap-on h-8 w-8 fill-current" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+                        </svg>
+                    </label>
+
+                </div>
+            </header>
+
+            <!-- Input Data Section -->
+            <section class="p-10 bg-base-100">
+                <div class="flex justify-center">
+                    <div class="flex space-x-4 my-4 mb-8">
+                        <label class="flex items-center space-x-2">
+                            <input type="radio" class="radio radio-primary" name="platform" id="link" />
+                            <span>Link</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="radio" class="radio radio-primary" name="platform" id="sortir" />
+                            <span>Sortir Komisi</span>
+                        </label>
+                    </div>
+
+                </div>
+                <h2 class="text-3xl font-bold text-center mb-6">Pengolah Link Produk Affiliate</h2>
+                <div class="max-w-md mx-auto">
+                    <textarea id="inputText" class="textarea textarea-bordered w-full" rows="6"
+                        placeholder="Masukkan data Shopee (pisahkan dengan koma dan baris baru)"></textarea>
+                    <button class="btn btn-primary w-full mt-4" id="processData"
+                        onclick="generateAffiliateLinks()">Proses Data</button>
+                    <div class="flex justify-center space-x-1">
+                        <button class="btn btn-primary mt-4" onclick="downloadLinks(true)">Unduh Semua Link</button>
+                        <button class="btn btn-primary mt-4" onclick="downloadLinks(false)">Unduh Link Ad</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Table Section -->
+            <section class="p-10 bg-base-100">
+                <h2 class="text-3xl font-bold text-center mb-6">Data Link</h2>
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra w-full" id="resultTable">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Original Link</th>
+                                <th>Shopee Link</th>
+                                <th>Affiliate Link</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Data akan ditampilkan di sini -->
+                        </tbody>
+                    </table>
+
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer p-10 bg-base-200 text-base-content">
+                <div>
+                    <p>Pengolah Data Affiliate Website<br />Dibuat oleh Aghni Q</p>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Drawer Sidebar -->
+        <div class="drawer-side">
+            <label for="my-drawer" class="drawer-overlay"></label>
+            <ul class="menu p-4 w-80 h-screen bg-base-100 text-base-content">
+                <li><a href="#">Lazada</a></li>
+                <li><a href="#">Shopee</a></li>
+                <li><a href="#">Data CSV</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the theme between light and dark
+        // const themeToggleButton = document.getElementById("theme-toggle");
+
+        // themeToggleButton.addEventListener("click", () => {
+        //     const currentTheme = document.documentElement.getAttribute("data-theme");
+        //     if (currentTheme === "light") {
+        //         document.documentElement.setAttribute("data-theme", "dark");
+        //     } else {
+        //         document.documentElement.setAttribute("data-theme", "light");
+        //     }
+        // });
+
+        function generateAffiliateLinks() {
+            const links = document.getElementById('inputText').value.trim().split('\n');
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+            let hasValidLinks = false;
+            const seenLinks = new Set();
+
+            links.forEach((link) => {
+                const parts = link.split(',');
+                const status = parts[0] === 'Ad' ? 'Ad' : (parts[0] === '' || parts[0] === '#LNF' ? 'Tidak Ada' : 'Ad');
+                const originalLink = parts[1] ? parts[1].trim() : '';
+
+                const result = extractShopeeID(originalLink);
+                if (result && !seenLinks.has(result.shopeeLink)) {
+                    seenLinks.add(result.shopeeLink);
+                    const affiliateLink = `https://affiliate.shopee.co.id/offer/product_offer/${result.id}`;
+                    const row = `<tr id="row-${result.id}">
+                        <td>${status}</td>
+                        <td><a class="product-link" href="${originalLink}" target="_blank">${result.productName}</a></td>
+                        <td><a class="product-link" href="${result.shopeeLink}" target="_blank">${result.shopeeLink}</a></td>
+                        <td><a class="product-link" href="${affiliateLink}" target="_blank">${affiliateLink}</a></td>
+                        <td><button class="btn btn-error btn-sm" onclick="deleteRow('${result.id}')">Hapus</button></td>
+                    </tr>`;
+                    tableBody.insertAdjacentHTML('beforeend', row);
+                    hasValidLinks = true;
+                }
+            });
+
+            document.getElementById('resultTable').style.display = hasValidLinks ? 'table' : 'none';
+            document.getElementById('inputText').value = '';
+        }
+
+        function deleteRow(productId) {
+            const row = document.getElementById(`row-${productId}`);
+            if (row) {
+                row.remove();
+            }
+        }
+
+        function downloadLinks(all = true) {
+            const tableBody = document.getElementById('tableBody');
+            const rows = tableBody.getElementsByTagName('tr');
+            const data = [["Status", "Original Link", "Shopee Link", "Affiliate Link"]]; // Header
+
+            for (const row of rows) {
+                const status = row.cells[0].innerText;
+                const originalLink = row.cells[1].innerText;
+                const shopeeLink = row.cells[2].innerText;
+                const affiliateLink = row.cells[3].innerText;
+
+                if (!all && status !== 'Ad') continue;
+
+                data.push([status, originalLink, shopeeLink, affiliateLink]);
+            }
+
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Links');
+
+            // Unduh file
+            XLSX.writeFile(workbook, all ? 'shopee_links_all.xlsx' : 'shopee_links_ad.xlsx');
+        }
+
+        function extractShopeeID(link) {
+            const regex1 = /i\.(\d+)\.(\d+)/;
+            const regex2 = /\/product\/\d+\/(\d+)/;
+            const regexName = /\/([^\/?]+)-i\.\d+\.\d+/;
+
+            let match = link.match(regex1);
+            if (match) {
+                const sellerID = match[1];
+                const productID = match[2];
+                const productNameMatch = link.match(regexName);
+                const productName = productNameMatch ? decodeURIComponent(productNameMatch[1].replace(/-/g, ' ')) : 'Unknown Product';
+                return {
+                    id: productID,
+                    shopeeLink: `https://shopee.co.id/product/${sellerID}/${productID}`,
+                    productName: productName
+                };
+            }
+
+            match = link.match(regex2);
+            if (match) {
+                const productNameMatch = link.match(regexName);
+                const productName = productNameMatch ? decodeURIComponent(productNameMatch[1].replace(/-/g, ' ')) : 'Unknown Product';
+                return {
+                    id: match[1],
+                    shopeeLink: link.split('?')[0],
+                    productName: productName
+                };
+            }
+
+            return null;
+        }
+        // Set Shopee radio button selected by default when the page loads
+        document.getElementById('link').checked = true;
+
+        // Add an event listener for the UI Vision radio button to redirect to another website
+        document.getElementById('sortir').addEventListener('click', function () {
+            window.location.href = "./data-sortir.html";  // Ganti dengan URL tujuan
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</body>
+
+</html>

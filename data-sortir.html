@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Commission Data </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            plugins: [daisyui],
+            daisyui: {
+                themes: ["light", "dark"],
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.css" />
+</head>
+
+<body>
+    <!-- Drawer Wrapper -->
+    <div class="drawer">
+        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+            <!-- Navbar -->
+            <header class="navbar bg-base-100 shadow-lg">
+                <div class="navbar-start">
+                    <a href="https://www.instagram.com/6.1aq" class="btn btn-ghost normal-case text-xl">Aghni Q</a>
+                </div>
+
+
+                <div class="navbar-end">
+                    <a href="https://github.com/aghni37/riset-data-affiliate-website/releases/download/uivision/Script.UI.Vision.Riset.Affiliate.zip"
+                        class="btn btn-outline btn-sm mr-4">
+                        Unduh Script UI Vision
+                    </a>
+
+
+                    <label class="swap swap-rotate">
+                        <!-- this hidden checkbox controls the state -->
+                        <input type="checkbox" class="theme-controller" value="light" />
+
+                        <!-- sun icon -->
+                        <svg class="swap-off h-8 w-8 fill-current" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+                        </svg>
+
+                        <!-- moon icon -->
+                        <svg class="swap-on h-8 w-8 fill-current" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+                        </svg>
+                    </label>
+
+                </div>
+            </header>
+
+            <!-- Input Data Section -->
+            <section class="p-10 bg-base-100">
+
+                <div class="flex justify-center">
+                    <div class="flex space-x-4 my-4 mb-8">
+                        <label class="flex items-center space-x-2">
+                            <input type="radio" class="radio radio-primary" name="platform" id="link" />
+                            <span>Link</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="radio" class="radio radio-primary" name="platform" id="sortir" />
+                            <span>Sortir Komisi</span>
+                        </label>
+                    </div>
+
+                </div>
+
+                <h2 class="text-3xl font-bold text-center mb-6">Pengolah Data Komisi Affiliate</h2>
+                <div class="max-w-md mx-auto">
+                    <textarea id="inputText" class="textarea textarea-bordered w-full" rows="6"
+                        placeholder="Masukkan data Shopee (pisahkan dengan koma dan baris baru)"></textarea>
+                </div>
+                <div class="flex justify-center space-x-1">
+                    <button class="btn btn-primary mt-4" id="processData">Proses Data</button><button
+                        class="btn btn-primary mt-4" id="downloadCsv">Unduh Data CSV</button>
+                </div>
+            </section>
+
+            <!-- Data Table Section -->
+            <section class="p-10 bg-base-100">
+                <h2 class="text-3xl font-bold text-center mb-6">Data Komisi</h2>
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra w-full">
+                        <thead>
+                            <tr>
+                                <th>Link Produk</th>
+                                <th id="sort-live-stream" style="cursor: pointer;">Live Stream</th>
+                                <th id="sort-komisi-ekstra" style="cursor: pointer;">Komisi Ekstra</th>
+                                <th id="sort-komisi-shopee" style="cursor: pointer;">Komisi Shopee</th>
+                                <th id="sort-total-komisi" style="cursor: pointer;">Total Komisi</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-table-body">
+                            <!-- Data akan ditampilkan di sini -->
+                        </tbody>
+                    </table>
+
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer p-10 bg-base-200 text-base-content">
+                <div>
+                    <p>Pengolah Data Affiliate Website<br />Dibuat oleh Aghni Q</p>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Drawer Sidebar -->
+        <div class="drawer-side">
+            <label for="my-drawer" class="drawer-overlay"></label>
+            <ul class="menu p-4 w-80 h-screen bg-base-100 text-base-content">
+                <li><a href="#">Lazada</a></li>
+                <li><a href="#">Shopee</a></li>
+                <li><a href="#">Data CSV</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Dark Mode Toggle
+        // const toggleButton = document.getElementById('theme-toggle');
+        // toggleButton.addEventListener('click', () => {
+        //     const html = document.querySelector('html');
+        //     html.dataset.theme = html.dataset.theme === 'light' ? 'dark' : 'light';
+        // });
+
+        // Proses Data Shopee
+        document.getElementById('processData').addEventListener('click', () => {
+            const inputText = document.getElementById('inputText').value;
+            const rows = inputText.split('\n');
+            const tableBody = document.getElementById('data-table-body');
+
+            tableBody.innerHTML = ''; // Clear previous data
+            document.getElementById('inputText').value = ''; // Clear the input field
+
+            rows.forEach(row => {
+                const columns = row.split(',');
+                if (columns.length === 5) {
+                    const linkProduk = columns[0];
+                    const liveStream = columns[1];
+                    const komisiEkstra = columns[2].split(' ')[0]; // Ambil persen
+                    const komisiShopee = columns[3].split(' ')[0]; // Ambil persen
+                    const totalKomisi = columns[4];
+
+                    const tr = document.createElement('tr');
+
+                    // Create Table Cells
+                    const tdProduk = document.createElement('td');
+                    tdProduk.textContent = linkProduk;
+                    tr.appendChild(tdProduk);
+
+                    const tdLiveStream = document.createElement('td');
+                    tdLiveStream.textContent = liveStream;
+                    tr.appendChild(tdLiveStream);
+
+                    const tdKomisiEkstra = document.createElement('td');
+                    tdKomisiEkstra.textContent = komisiEkstra;
+                    tr.appendChild(tdKomisiEkstra);
+
+                    const tdKomisiShopee = document.createElement('td');
+                    tdKomisiShopee.textContent = komisiShopee;
+                    tr.appendChild(tdKomisiShopee);
+
+                    const tdTotalKomisi = document.createElement('td');
+                    tdTotalKomisi.textContent = totalKomisi;
+                    tr.appendChild(tdTotalKomisi);
+
+                    // Add Delete Button
+                    const tdDelete = document.createElement('td');
+                    const btnDelete = document.createElement('button');
+                    btnDelete.className = 'btn btn-error btn-sm';
+                    btnDelete.textContent = 'Hapus';
+                    btnDelete.onclick = () => tr.remove();
+                    tdDelete.appendChild(btnDelete);
+                    tr.appendChild(tdDelete);
+
+                    tableBody.appendChild(tr);
+                }
+            });
+        });
+
+        // Sort Data by Column with Toggle Asc/Desc
+        const sortTable = (columnIndex, isNumeric = false) => {
+            const rows = Array.from(document.querySelectorAll('#data-table-body tr'));
+            let ascending = true;
+
+            // Get current sort direction
+            const header = document.querySelectorAll("th")[columnIndex];
+            if (header.classList.contains('asc')) {
+                ascending = false;
+                header.classList.remove('asc');
+                header.classList.add('desc');
+            } else {
+                header.classList.remove('desc');
+                header.classList.add('asc');
+            }
+
+            rows.sort((a, b) => {
+                const aText = a.cells[columnIndex].textContent.trim();
+                const bText = b.cells[columnIndex].textContent.trim();
+
+                if (isNumeric) {
+                    return ascending
+                        ? parseFloat(aText.replace(/[^\d.-]/g, '')) - parseFloat(bText.replace(/[^\d.-]/g, ''))
+                        : parseFloat(bText.replace(/[^\d.-]/g, '')) - parseFloat(aText.replace(/[^\d.-]/g, ''));
+                } else {
+                    return ascending
+                        ? aText.localeCompare(bText)
+                        : bText.localeCompare(aText);
+                }
+            });
+
+            rows.forEach(row => document.querySelector('#data-table-body').appendChild(row));
+        };
+
+        // Add click events to the headers for sorting
+        document.getElementById('sort-live-stream').addEventListener('click', () => sortTable(1));
+        document.getElementById('sort-komisi-ekstra').addEventListener('click', () => sortTable(2, true));
+        document.getElementById('sort-komisi-shopee').addEventListener('click', () => sortTable(3, true));
+        document.getElementById('sort-total-komisi').addEventListener('click', () => sortTable(4, true));
+
+        // Unduh Data CSV
+        document.getElementById('downloadCsv').addEventListener('click', () => {
+            const tableRows = document.querySelectorAll('#data-table-body tr');
+            let csvData = 'Link Produk,Live Stream,Komisi Ekstra,Komisi Shopee,Total Komisi\n';
+
+            tableRows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowData = Array.from(cells).slice(0, 5).map(cell => cell.textContent.replace(/[^\x20-\x7E]/g, '')).join(',');
+                csvData += rowData + '\n';
+            });
+
+            // Create a download link
+            const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'data_affiliate.csv';
+            link.click();
+
+
+        });
+
+        // Set Shopee radio button selected by default when the page loads
+        document.getElementById('sortir').checked = true;
+
+        // Add an event listener for the UI Vision radio button to redirect to another website
+        document.getElementById('link').addEventListener('click', function () {
+            window.location.href = "./index.html";  // Ganti dengan URL tujuan
+        });
+    </script>
+</body>
+
+</html>
